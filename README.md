@@ -3,4 +3,4 @@ Some C++ code for basic (non-quantum) molecular dynamics simulations based on th
 
 Include `MDSim.h` to start. Define a potential as a function of a vector, define a simulation box and starting condition, configure a Thermostat if needed. Check out `example.cpp` to see how it works (requires GLUT for visuals).
 
-Proper API description will follow in the future.
+Proper API description will follow in the future, as will proper English comments to make the code more understandable.
