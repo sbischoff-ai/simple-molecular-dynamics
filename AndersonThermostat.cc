@@ -26,7 +26,7 @@ double mersenneTwister(){
 	static int i = N + 1;
 
 	if (i > N) {
-		/* Initialisiere y mit Pseudozufallszahlen */
+		/* initialize y with pseudo random numbers */
 		y[0] = seed;
 
 		for (i = 1; i < N; ++i) {
@@ -35,7 +35,7 @@ double mersenneTwister(){
 	}
 
 	if (i == N) {
-		/* Berechne neuen Zustandsvektor */
+		/* calculate new state vector */
 		uint32_t h;
 
 		for (i = 0; i < N - M; ++i) {
@@ -53,7 +53,7 @@ double mersenneTwister(){
 	}
 
 	uint32_t e = y[i++];
-	/* Tempering */
+	/* tempering */
 	e ^= (e >> 11);
 	e ^= (e << 7) & 0x9d2c5680;
 	e ^= (e << 15) & 0xefc60000;
