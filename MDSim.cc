@@ -17,7 +17,7 @@ MDParticle::~MDParticle(){
 
 }
 
-// Das Löschen einer List löscht auch alle Einträge
+// Das LÃ¶schen einer List lÃ¶scht auch alle EintrÃ¤ge
 MDParticleList::~MDParticleList(){
 	this->clear();
 }
@@ -41,10 +41,10 @@ void MDParticleList::addParticle(MDParticle* particle){
 }
 
 void MDParticleList::clear(){
-	while (this->first) delete this->first; // Der ParticleListEntry Destruktor kümmert sich um alles (s.u.)
+	while (this->first) delete this->first; // ParticleListEntry destructor handles everything (see below).
 }
 
-// Das Löschen eines Listeneintrags lässt die Liste immer intakt
+// Deleting a list entry keeps list intact.
 MDParticleListEntry::~MDParticleListEntry(){
 	if (this->prior) this->prior->next = this->next;
 	if (this->next) this->next->prior = this->prior;
@@ -81,7 +81,7 @@ verletUpdate(verletUpdate_), verletSteps(0), directional(201, 201), thermo(0), g
 };
 
 void MDSim::initSim(bool periodic_, vec simBox_, vec(*r0)(int) = 0, vec(*v0)(int) = 0, int histogramResolution_ = 201, double histogramLength_ = 0.5){
-	// Startbedingungen wiederherstellen
+	// restore starting conditions
 	// **************************************************
 	int i, j, k;
 	this->histogramResolution = histogramResolution_;
@@ -122,7 +122,7 @@ void MDSim::initSim(bool periodic_, vec simBox_, vec(*r0)(int) = 0, vec(*v0)(int
 	this->radial = vec(0, this->histogramResolution);
 	this->directional = mat(this->histogramResolution, this->histogramResolution);
 	this->ePot = (this->ePotMin = this->refreshVerletLists(true, true));
-	// kinetische Energie und Gesamtimpuls berechnen
+	// calculate kinetic energy and total momentum
 	// vec p_ges(0, this->dim);
 	this->eKin = 0;
 	for (entry = this->particles->getFirst(); entry; entry = entry->getNext()){
@@ -138,7 +138,7 @@ void MDSim::initSim(bool periodic_, vec simBox_, vec(*r0)(int) = 0, vec(*v0)(int
 void MDSim::velocityVerletStep(bool countRadial){
 	if (!this->pause) {
 		int i;
-		// Alle Teilchen in der Liste durchlaufen
+		// iterate through all particles in list
 		MDParticleListEntry* entry;
 		for (entry = this->particles->getFirst(); entry; entry = entry->getNext()){
 			MDParticle* particle = entry->getThis();
@@ -147,8 +147,8 @@ void MDSim::velocityVerletStep(bool countRadial){
 			// keep periodic boundary conditions
 			if (this->periodic) for (i = 1; i <= this->dim; i++) particle->r[i] -= this->simBox[i] * floor(particle->r[i] / this->simBox[i]);
 		}
-		// falls die Zeit reif ist (VerletSteps "voll") werden die Verletlisten aktualisiert
-		// Die Kraftberechnung findet dann ebenfalls im Listenupdate statt.
+		// if it's time (VerletSteps is "full") the verlet lists are updated
+		// calculation of force then also takes place in list update
 		if (this->verletSteps > this->verletUpdate) {
 			this->ePot = this->refreshVerletLists(true, countRadial);
 			this->verletSteps = 0;
@@ -156,7 +156,7 @@ void MDSim::velocityVerletStep(bool countRadial){
 		else this->ePot = velocityVerletForce(); // new force with new r
 		this->verletSteps++;
 		for (entry = this->particles->getFirst(); entry; entry = entry->getNext()) entry->getThis()->v += 0.5*dt*entry->getThis()->a; // rest step v with new force
-		// neue kinetische Energie und Gesamtimpuls berechnen
+		// calculate new kinetic energy and total momentum
 		// vec p_ges(0, this->dim);
 		this->eKin = 0;
 		for (entry = this->particles->getFirst(); entry; entry = entry->getNext()){
@@ -168,12 +168,12 @@ void MDSim::velocityVerletStep(bool countRadial){
 	}
 }
 
-// muss nach der velocityVerletStep Funktion aufgerufen werden um die Graphen um den letzten Zeitschritt zu erweitern
+// has to be called after the velocityVerletStep function to extend the graphs by the last time step
 void MDSim::updateGraphs(){
 	if (this->pause) return;
 	this->graphDataLast = (this->graphDataLast->next = new graphData_t);
-	// Der erste Listeneintrag (graphDataFirst) soll die Maximalwerte der Graphen (zum Normieren) enthalten.
-	// Zuweisung der neuen Werte und Abfrage ob sie größer sind als das letzte aktuelle Maximum kann man kombinieren:
+	// The first list entry (graphDataFirst) contains the maximum values of the graphs (for normalization).
+	// Assignment of new values and query for wether they are greater than last maximum can be combined:
 	if ((this->graphDataLast->ePot = this->ePot) > this->graphDataFirst->ePot) this->graphDataFirst->ePot = this->graphDataLast->ePot;
 	if ((this->graphDataLast->eKin = this->eKin) > this->graphDataFirst->eKin) this->graphDataFirst->eKin = this->graphDataLast->eKin;
 	this->graphDataLast->next = 0;
