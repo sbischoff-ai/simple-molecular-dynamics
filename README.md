@@ -7,7 +7,7 @@ Easiest way to check out examples is via the VS solution: Restore nuget packages
 
 ## Example 2D
 ![Screen2D](./screen2D.png)
-You can pause and resume with *P*, raise and lower target temperature with *+* and *-* respectively.
+You can pause and resume with *P*, raise and lower target temperature with *+* and *-* respectively. Red dots are images of particles in the simulation box in neighbouring boxes (periodic boundary conditions).
 
 ## Example 3D
 ![Screen3D](./screen3D.png)
