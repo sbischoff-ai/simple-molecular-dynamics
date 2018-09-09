@@ -15,15 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MDParticleListEntry.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="MDSim.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="vec.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="AndersonThermostat.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -33,24 +24,30 @@
     <ClInclude Include="MDParticleList.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="MDParticleListEntry.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MDSim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="vec.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AndersonThermostat.cc">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="mat.cc">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="MDSim.cc">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="vec.cc">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="AndersonThermostat.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="example.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="example_2d.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="mat.cc">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
