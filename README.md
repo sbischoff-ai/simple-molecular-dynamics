@@ -17,4 +17,4 @@ If you play around with the particle numbers and temperatures, you can simulate 
 
 There is a commented-out section in the examples to plot a correlation function of the particles instead of the current temperature, which allows to better identify phase transitions.
 
-Proper API description will follow in the future, as will proper English comments to make the code more understandable.
+Proper API description will follow in the future, as will proper English comments to make the code more understandable. Also maybe I'll make a linkable library out of this with cith OpenCL-support and everything.
