@@ -1,5 +1,5 @@
 # Molecular Dynamics
-Some C++ code for basic (non-quantum) Molecular Dynamics simulations in arbitrary dimension based on the Velocity Verlet algorithm.
+Some C++ code for basic (non-quantum) Molecular Dynamics simulations in 2 or 3 dimensions based on the Velocity Verlet algorithm.
 
 Include `MDSim.h` to start. Define a potential as a function of a vector (as defined in vec.h), define a simulation box and starting condition, configure a Thermostat if needed. Check out `example.cpp` or `example_2D.cpp` to see how it works (requires freeglut for visuals).
 
